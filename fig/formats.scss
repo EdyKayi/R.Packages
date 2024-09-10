@@ -1,0 +1,22 @@
+.reveal .slide-logo {
+  top: 0%;
+  left: 83%;
+  height: 16% !important;
+  width: 15%!important;
+  max-width: unset !important;
+  max-height: unset !important;
+}
+
+.slide-number, .reveal.has-logo .slide-number {
+  bottom: 14px !important;
+  right: 50px !important;
+  top: unset !important;
+  color: #777777 !important;
+}
+
+
+/*-- scss:defaults --*/
+$code-block-bg: #F7F7F7;
+
+
+

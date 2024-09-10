@@ -1,0 +1,256 @@
+---
+title: "R-packages"
+subtitle: 
+  "Introduction"
+author: "Emil Thranholm and Laurits Mikkelsen"
+format: 
+  revealjs:
+    theme: [default, "fig/formats.scss"]
+    logo: "fig/dstlogo_blue.png"
+    code-line-numbers: false
+    slide-number: c/t
+    self-contained: true
+execute: 
+  echo: true
+title-slide-attributes: 
+  data-background-color: "#0F78C8"
+  data-background-image: "fig/dstlogo_white.png"
+  data-background-size: 15%
+  data-background-position: 98% 2%
+editor_options: 
+  chunk_output_type: console
+---
+
+## R-packages in Statistics Denmark
+
+Help to tackle issues specific to Stats DK.
+
+--    Establish connection to our internal databases (`DSTdb`)
+
+--    Retrieve data from our databases (`DSTudtraek`)
+
+--    Get classifications from our Metadata Bank (`DSTcolectica`)
+
+## CRAN
+
+`install.packages("x")`
+
+Over 21 000 packages available on CRAN
+
+. . .
+
+Even more on GitHub
+
+## What are packages?
+
+Often just functions bundled together
+
+Repeated tasks, it makes sense to make a function
+
+## Why packages?
+
+Functionality
+
+Easy to share
+
+Standardised tools to organise your code
+
+## Resources about packages
+
+R-packages book: [r-pkgs.org](https://r-pkgs.org)
+
+Happy Git and GitHub for the useR: [happygitwithr.com](https://happygitwithr.com)
+
+Minimal example of creating first package:
+
+--   [Package from scratch](https://hilaryparker.com/2014/04/29/writing-an-r-package-from-scratch/)
+
+--   [Updated example using newer packages](https://r-mageddon.netlify.app/post/writing-an-r-package-from-scratch/)
+
+. . .
+
+More advanced covering all cases in package writing: [CRAN documentation](https://cran.r-project.org/doc/manuals/R-exts.html#Creating-R-packages)
+
+## Useful packages
+
+Packages to create packages:
+
+`devtools`, `usethis` and `roxygen2`
+
+. . .
+
+```{r}
+# If not already installed use install.packages("")
+library(devtools)
+library(roxygen2)
+library(usethis)
+```
+
+
+## Create your package
+
+This code gives you the minimal setup of your package
+
+```{r}
+
+usethis::create_package(path = "C:/ETH/git/ETHdemo")
+
+```
+
+
+## Folder structure
+
+![](fig/Mappestruktur.png)
+
+## First function
+
+```{r}
+#| eval: false
+
+usethis::use_r("times2")
+
+```
+
+<br>
+
+. . .
+
+```{r}
+
+times2 <- function(x){
+  x*2
+}
+
+```
+
+. . .
+
+Test functionality, allows you to test if your function does as expected
+
+```{r}
+#| eval: false
+
+devtools::load_all()
+
+```
+
+
+## Document function
+
+Go to "Code" and find "Insert Roxygen Skeleton"
+
+. . .
+
+```{r}
+#| eval: false
+#' @title Times number by 2
+#'
+#' @param x A numeric value
+#'
+#' @returns Output the input number multiplied by 2
+#' @export
+#'
+#' @examples
+#' times2(2)
+
+times2 <- function(x){
+  x*2
+}
+
+```
+
+. . .
+
+<br>
+
+```{r}
+#| eval: false
+
+devtools::document()
+```
+
+Try `?times2` and notice a new folder called `man`
+
+## Git and GitHub
+
+A few steps to go through
+
+Setup user 
+```{r}
+#| eval: false
+usethis::use_git_config(user.name = "Thranholm", user.email = "ethranholm@hotmail.com")
+```
+
+. . .
+
+Setup GitHub credentials 
+
+```{r}
+#| eval: false
+credentials::set_github_pat()
+```
+
+Maybe you need to create a personal access token:
+```{r}
+#| eval: false
+usethis::create_github_token()
+```
+
+. . .
+
+Use git: `usethis::use_git()`
+
+Get package to GitHub
+
+```{r}
+#| eval: false
+
+usethis::use_github()
+
+```
+
+## Document whole package
+
+```{r}
+#| eval: false
+
+usethis::use_readme_rmd()
+
+```
+
+After writing documentation, it can be rendered with
+
+```{r}
+#| eval: false
+
+devtools::build_readme()
+
+```
+
+## Check and install
+
+When we think we are done with our code in the package, we can check that our package is still in working order
+
+```{r}
+#| eval: false
+
+devtools::check()
+```
+
+Afterwards we can install the package and use `library()` to load it.
+
+```{r}
+#| eval: false
+
+devtools::install()
+library(ETHdemo)
+
+```
+
+## What now?
+
+Start making your own package.
+
+Write your first functions, maybe related to StatsBank, Survey Dashboard or MPI.
+
+Open the R-packages book: [https://r-pkgs.org](https://r-pkgs.org)
