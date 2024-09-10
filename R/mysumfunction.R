@@ -2,7 +2,7 @@
 
 #' Title
 #'
-#' @param param + A numeric value
+#' @param s
 #'
 #' @return Output the input number plus by 1
 #' @export
